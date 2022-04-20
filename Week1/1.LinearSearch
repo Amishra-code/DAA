@@ -1,0 +1,48 @@
+/*I. Given an array of nonnegative integers, design a linear algorithm and implement it using a 
+program to find whether given key element is present in the array or not. Also, find total number 
+of comparisons for each input case. (Time Complexity = O(n), where n is the size of input) */
+
+#include<iostream>
+using namespace std;
+
+int main()
+{
+    int t;
+    cout<<"Enter number of test cases value : ";
+    cin>>t;
+
+    while (t--)
+    {
+        int n, i;
+
+        cout<<"Enter limit of value : ";
+        cin>>n; 
+
+        cout<<"Enter array elements : ";
+        int a[n];
+        for(i=0; i<n; i++)
+            cin>>a[i];
+
+        int key, flag=-1;
+        cout<<"Enter key value : ";
+        cin>>key;
+
+        for(i=0; i<n; i++)
+        {
+            if(a[i]==key)
+            {
+                flag=1;
+                break;
+            }
+            
+        }
+
+        if(flag==1)
+            cout<<"Present " << i+1 << endl;
+        else
+            cout<<"Not Present " << i+1 << endl;
+    }
+    
+    return 0;
+
+} 
