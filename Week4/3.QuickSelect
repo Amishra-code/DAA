@@ -1,0 +1,109 @@
+/*III. Given an unsorted array of integers, design an algorithm and implement it using a program to
+find Kth smallest or largest element in the array. (Worst case Time Complexity = O(n))
+Input Format: 
+The first line contains number of test cases, T.
+For each test case, there will be three input lines.
+First line contains n (the size of array).
+Second line contains space-separated integers describing array.
+Third line contains K.
+Output Format:
+The output will have T number of lines. 
+For each test case, output will be the Kth smallest or largest array element.
+If no Kth element is present, output should be “not present”.*/
+
+#include<iostream>
+using namespace std;
+
+int Partition(int a[], int low, int high)
+{
+    int pivot=a[low];
+    int i=low, j=high;
+    
+    do
+    {
+        do
+        {
+            i++;
+        } while (a[i]<=pivot);
+
+        do
+        {
+            j--;
+        } while (a[j]>pivot);
+        
+        if(i<j)
+        {
+            int temp=a[j];
+            a[j]=a[i];
+            a[i]=temp;
+        }
+        
+    } while (i<j);
+
+    a[low]=a[j];
+    a[j]=pivot;
+
+    return j;
+    
+}
+
+void QuickSelect(int a[], int low, int high, int k)
+{
+    int j;
+    if(low<high)
+    {
+        j=Partition(a, low, high);
+
+        if(j==k)
+        {
+            cout<< k <<"th smallest elements is : " <<a[j];
+            return;
+        }
+
+        else if(j>k) 
+        {  
+            QuickSelect(a, low, j, k);
+        }
+
+        else if(j<k)
+        {
+            QuickSelect(a, j+1, high, k);
+        }
+
+        else 
+        {
+            cout<<"Not Present." <<endl;
+            return;
+        }
+    }
+
+}
+
+int main()
+{
+    int t, k;
+    cout<<"Enter test case limit : ";
+    cin>>t;
+ 
+    while (t--)
+    {
+        int n;
+        cout<<"Enter array limit : ";
+        cin>>n;
+
+        int a[n];
+        cout<<"Enter array elements : ";
+        for(int i=0; i<n; i++)
+            cin>>a[i];
+
+        cout<<"Enter kth smallest element : ";
+        cin>>k; 
+
+        int l=0, h=n-1;
+
+        QuickSelect(a, l, h, k-1);
+  
+    }
+    
+    return 0;
+}
